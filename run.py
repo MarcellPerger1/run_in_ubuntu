@@ -2,6 +2,8 @@ from pythonfuzz.fuzzer import Fuzzer
 
 
 def fn(buf):
+    if not len(buf):
+        return -1
     if buf[0] == '\x00':
         return True
     elif buf[0] == '\x01':
