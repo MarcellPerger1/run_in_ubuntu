@@ -30,6 +30,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Install npm
-      run: npm install -g npm@$WORK
+      run: sudo npm install -g npm@$WORK
     - name: Test it
       run: npm_config_prefix=foo npm run bar
