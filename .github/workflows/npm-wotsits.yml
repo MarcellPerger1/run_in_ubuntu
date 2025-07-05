@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  newversions:
     strategy:
       fail-fast: false
       matrix:
@@ -25,7 +25,6 @@ jobs:
         - "4"
         - "3"
         - "2"
-        - "1"
 
     runs-on: ubuntu-latest
     env:
@@ -39,3 +38,30 @@ jobs:
       run: npm_config_prefix=foo npm config ls -l | grep prefix -i
     - name: Test it
       run: npm_config_prefix=foo npm run bar
+  oldversions:
+    strategy:
+      fail-fast: false
+      matrix:
+        npmver:
+        - "1"
+        - "1.0.1"
+        - "0.9"
+
+    runs-on: ubuntu-latest
+    env:
+      WORK: ${{ matrix.npmver }}
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install npm
+      run: sudo npm install -g npm@$WORK
+
+    - name: Setup up ancient nodejs
+      uses: actions/setup-node@v3.9.1
+      with:
+        node-version: 8
+    - name: Does the envvar work at all?
+      run: npm_config_prefix=foo npm config ls -l | grep prefix -i
+    - name: Test it
+      run: npm_config_prefix=foo npm run bar
+
