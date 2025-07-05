@@ -12,6 +12,7 @@ permissions:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         npmver:
         - "11"
@@ -22,6 +23,9 @@ jobs:
         - "6"
         - "5"
         - "4"
+        - "3"
+        - "2"
+        - "1"
 
     runs-on: ubuntu-latest
     env:
