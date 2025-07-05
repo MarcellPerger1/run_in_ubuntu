@@ -31,5 +31,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Install npm
       run: sudo npm install -g npm@$WORK
+    - name: Does the envvar work at all?
+      run: npm_config_prefix=foo npm config ls -l | grep prefix -i
     - name: Test it
       run: npm_config_prefix=foo npm run bar
