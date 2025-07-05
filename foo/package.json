@@ -1,0 +1,6 @@
+{
+  "name": "FOO",
+  "scripts": {
+    "bar": "echo It works"
+  }
+}
